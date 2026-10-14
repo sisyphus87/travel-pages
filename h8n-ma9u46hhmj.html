@@ -318,8 +318,6 @@
       }
       .drawer-toggle .label { display: none; }
     }
-    /* 个人定制：隐藏「行程信息」悬浮按钮——手机端占位，行程信息已由每日清单承载（specificity 高于 900px 断点的强制显示） */
-    button.drawer-toggle { display: none !important; }
 
     /* ===== Drawer Backdrop ===== */
     .drawer-backdrop {
@@ -1386,7 +1384,7 @@ p a, a { color: #b3541e !important; }
 /* 地图区域 */
 #map-section { background: #fff !important; }
 </style>
-</head>
+<link rel="stylesheet" href="styles.css"></head>
 <body>
 
   <a href="#main" class="skip-link">跳转到主内容</a>
