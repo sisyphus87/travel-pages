@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta name="color-scheme" content="light">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>20261114 姐姐渝黔双城8日游 · 渝黔双城美食8日游（重庆·贵阳·荔波·织金）</title>
+  <title>20261114 姐姐渝黔双城8日游（重庆·贵阳·荔波·织金） · 2026-11-14 至 2026-11-21</title>
   <style>
     /* ===== 基础 ===== */
     *, *::before, *::after { box-sizing: border-box; }
@@ -318,6 +317,7 @@
       }
       .drawer-toggle .label { display: none; }
     }
+    /* 个人定制：隐藏「行程信息」悬浮按钮——手机端占位，行程信息已由每日清单承载（specificity 高于 900px 断点的强制显示） */
 
     /* ===== Drawer Backdrop ===== */
     .drawer-backdrop {
@@ -838,7 +838,11 @@
       background: var(--accent-soft);
       padding: 4px 12px;
       border-radius: 100px;
-      white-space: nowrap;
+      /* 长天气提示（如 D2/D5 30+ 字）在窄屏 nowrap 会撑破卡片叠压相邻元素——允许换行 */
+      white-space: normal;
+      line-height: 1.5;
+      max-width: 100%;
+      overflow-wrap: anywhere;
       font-weight: 500;
     }
     .day-card .theme {
@@ -1007,6 +1011,19 @@
       font-size: var(--fs-xs);
       padding-left: var(--sp-2);
       border-left: 1px dashed var(--line);
+    }
+    ol.timeline li.time-block .meal-leg .meal-nav {
+      margin-left: auto;
+      flex-shrink: 0;
+      align-self: center;
+      font-size: var(--fs-xs);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 2px 8px;
+      border: 1px solid var(--accent-soft);
+      border-radius: 4px;
+      background: var(--accent-soft);
     }
     @media (prefers-color-scheme: dark) {
       ol.timeline li.time-block .meal-leg {
@@ -1262,46 +1279,7 @@
       #map { display: none; }
     }
   </style>
-
-<style id="force-light">
-/* 强制亮色：深色模式下浅底卡片(PlanB/安全提醒/行动清单)不进暗色变量，修复浅字叠浅底 */
-:root, html, body, main, article, section, div, span, p, li, ul, ol, dt, dd, label, h1, h2, h3, h4, h5, h6, header, footer {
-  --bg: #faf7f1 !important;
-  --bg-elevated: #ffffff !important;
-  --bg-soft: #f4efe6 !important;
-  --fg: #2f2a24 !important;
-  --fg-muted: #6b6257 !important;
-  --fg-subtle: #8d8478 !important;
-  --line: #e8e0d3 !important;
-  --line-strong: #d8cdbb !important;
-  --accent: #8a5a2b !important;
-  --accent-hover: #a06a35 !important;
-  --accent-soft: #f4ede2 !important;
-  color-scheme: light;
-}
-html { color-scheme: light !important; }
-body { background: #faf7f1 !important; color: #2f2a24 !important; }
-/* 固定浅底卡片：写死深字，任何模式下不变 */
-.decision-card { background: #fff8ec !important; border: 1px solid #ecd9b9 !important; color: #4a3a28 !important; }
-.decision-card strong { color: #8a5a2b !important; }
-.decision-card p { color: #5a4a35 !important; }
-.safety-card { background: #fff4f0 !important; border: 1px solid #f2d5c9 !important; color: #5a3a2a !important; }
-.safety-card strong { color: #b04a2a !important; }
-ol.timeline li.time-block .meal-leg { background: #fff5e0 !important; color: #5a3a00 !important; border-left-color: #d4a52e !important; }
-ol.timeline li.time-block .meal-leg .meal-leg-label { color: #8a6a00 !important; }
-ol.timeline li.time-block .meal-leg .meal-leg-name { color: #2f2a24 !important; }
-#validation-banner { background: #fdf6e3 !important; color: #6b5312 !important; }
-#validation-banner.banner-pass { background: #f0fdf4 !important; color: #166534 !important; }
-#validation-banner.banner-warn { background: #fdf6e3 !important; color: #6b5312 !important; }
-/* 行动清单卡 */
-.zx-wrap { color: #2f2a24 !important; }
-.zx-card { background: #ffffff !important; }
-.zx-item input:checked ~ .zx-tx { color: #b3b3b3 !important; }
-/* 链接与金额统一深色可读 */
-a { color: #b3541e !important; }
-.cost-line-amount { color: #1f5a3a !important; }
-p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { color: inherit; }
-</style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -1313,18 +1291,23 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
     <div id="validation-banner" role="status" aria-live="polite" hidden></div>
 
     <header class="hero">
-      <h1>20261114 姐姐渝黔双城8日游 · 渝黔双城美食8日游</h1>
+      <h1>20261114 姐姐渝黔双城8日游（重庆·贵阳·荔波·织金）</h1>
       <p class="meta">2026-11-14 至 2026-11-21 ·  · 重庆-贵阳（含荔波小七孔、织金洞）</p>
-      <p class="summary">以用户行程单为骨架：11.14-11.17 重庆（解放碑周边3晚），11.17 傍晚高铁 G3729（重庆西16:12→贵阳东18:20）转场贵阳（黔灵东路/喷水池一带4晚）；11.19 荔波小七孔东进东出一日往返，11.20 织金洞+大峡谷跟团一日游，11.21 G1768（贵阳北10:47→黄山北18:27）返程。行程单中提到的美食全部纳入当日路线。</p>
     </header>
-
 
 <style id="zx-checklist-style">
 .zx-wrap{font-family:-apple-system,"PingFang SC",sans-serif;max-width:920px;margin:14px auto 4px;color:#2f2a24}
-.zx-title{font-size:1.25em;font-weight:700;margin:10px 0 4px;color:#8a5a2b}
-.zx-sub{font-size:.82em;color:#8d8478;margin-bottom:12px}
-.zx-bar{height:8px;background:#efe9dd;border-radius:6px;overflow:hidden;margin-bottom:14px}
-.zx-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c99b6a,#8a5a2b);transition:width .3s}
+.zx-master{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e8e0d3;border-radius:14px;padding:13px 16px;cursor:pointer;user-select:none;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.zx-master:focus-visible{outline:2px solid #8a5a2b;outline-offset:2px}
+.zx-m-title{font-weight:700;font-size:1.12em;color:#8a5a2b;flex:none}
+.zx-m-bar{flex:1;height:8px;background:#efe9dd;border-radius:6px;overflow:hidden;min-width:60px}
+.zx-m-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c99b6a,#8a5a2b);transition:width .3s}
+.zx-m-count{font-size:.86em;color:#6b6257;font-variant-numeric:tabular-nums;flex:none}
+.zx-m-arrow{color:#b9a98f;transition:transform .25s;flex:none}
+.zx-wrap.zx-open .zx-m-arrow{transform:rotate(180deg)}
+.zx-cards{display:none;margin-top:10px}
+.zx-wrap.zx-open .zx-cards{display:block}
+.zx-sub{font-size:.82em;color:#8d8478;margin:0 0 12px}
 .zx-card{background:#fff;border:1px solid #e8e0d3;border-radius:14px;margin:10px 0;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .zx-head{display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;user-select:none;flex-wrap:wrap}
 .zx-badge{background:#8a5a2b;color:#fff;border-radius:8px;font-weight:700;font-size:.8em;padding:3px 9px}
@@ -1346,9 +1329,14 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
 </style>
 
 <div class="zx-wrap" id="zx-checklist">
-<div class="zx-title">🎒 每日行动清单</div>
+<div class="zx-master" id="zx-master" role="button" tabindex="0" aria-expanded="false" aria-controls="zx-cards">
+  <span class="zx-m-title">🎒 每日行动清单</span>
+  <span class="zx-m-bar"><i id="zx-total-bar"></i></span>
+  <span class="zx-m-count" id="zx-m-count">0/0</span>
+  <span class="zx-m-arrow">▾</span>
+</div>
+<div class="zx-cards" id="zx-cards">
 <div class="zx-sub">点日期行展开当天安排 · 勾选自动保存（本机浏览器）· 详细动线见下方各日卡片</div>
-<div class="zx-bar"><i id="zx-total-bar"></i></div>
 <div class="zx-card" id="zx-pre">
  <div class="zx-head" onclick="this.parentElement.classList.toggle('zx-open')">
    <span class="zx-badge">行前</span>
@@ -1486,29 +1474,37 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
 <label class="zx-item"><input type="checkbox" data-k="d8-0"><span class="zx-ic">🧳</span><span class="zx-tx">07:50 退房 → 08:40 前到<b>贵阳北</b>（G1768 10:47 开）</span></label>
 <label class="zx-item"><input type="checkbox" data-k="d8-1"><span class="zx-ic">🚄</span><span class="zx-tx">高铁 7h40m：<b>自备干粮</b>；晚点兜底 G2186 贵阳东 13:30</span></label>
 <label class="zx-item"><input type="checkbox" data-k="d8-2"><span class="zx-ic">🏠</span><span class="zx-tx">18:27 黄山北 → 转车回祁门，行程收官</span></label></div></div></div>
-</div>
+</div></div>
 
 <script>
 (function(){
- var total=0,done=0;
+ var wrap=document.querySelector('.zx-wrap');
+ var master=document.getElementById('zx-master');
+ function refresh(){
+   var total=0,done=0;
+   document.querySelectorAll('.zx-wrap input[type=checkbox]').forEach(function(c){total++;if(c.checked)done++;});
+   document.getElementById('zx-total-bar').style.width=(total?done/total*100:0)+'%';
+   document.getElementById('zx-m-count').textContent=done+'/'+total;
+ }
  document.querySelectorAll('.zx-wrap input[type=checkbox]').forEach(function(cb){
-   total++;
    var k='yq8-'+cb.getAttribute('data-k');
-   if(localStorage.getItem(k)==='1'){cb.checked=true;done++;}
+   if(localStorage.getItem(k)==='1')cb.checked=true;
    cb.addEventListener('change',function(){
      localStorage.setItem(k,cb.checked?'1':'0');
      var card=cb.closest('.zx-card'),n=card.querySelectorAll('input:checked').length;
      card.querySelector('.zx-prog').textContent=n+'/'+card.querySelectorAll('input').length;
-     done=0;document.querySelectorAll('.zx-wrap input[type=checkbox]').forEach(function(c){if(c.checked)done++});
-     document.getElementById('zx-total-bar').style.width=(done/total*100)+'%';
+     refresh();
    });
  });
  document.querySelectorAll('.zx-card').forEach(function(c){
    var n=c.querySelectorAll('input:checked').length;
    c.querySelector('.zx-prog').textContent=n+'/'+c.querySelectorAll('input').length;
  });
- var bar=document.getElementById('zx-total-bar');
- if(bar)bar.style.width=(done/total*100)+'%';
+ function setOpen(o){wrap.classList.toggle('zx-open',o);master.setAttribute('aria-expanded',o?'true':'false');localStorage.setItem('yq8-master',o?'1':'0');}
+ master.addEventListener('click',function(){setOpen(!wrap.classList.contains('zx-open'));});
+ master.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setOpen(!wrap.classList.contains('zx-open'));}});
+ if(localStorage.getItem('yq8-master')==='1')setOpen(true);
+ refresh();
 })();
 </script>
 
@@ -1675,7 +1671,7 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
     })();
     // TRIP_DATA_START
     window.tripData = {
-  "trip_name": "渝黔双城美食8日游（重庆·贵阳·荔波·织金）",
+  "trip_name": "20261114 姐姐渝黔双城8日游（重庆·贵阳·荔波·织金）",
   "city": "重庆-贵阳（含荔波小七孔、织金洞）",
   "date_range": "2026-11-14 至 2026-11-21",
   "party_size": 2,
@@ -4620,6 +4616,15 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
         return `https://uri.amap.com/navigation?from=${f.lng},${f.lat},${fromName}&to=${t.lng},${t.lat},${toName}&mode=${amapMode(mode)}&callnative=1`;
       }
 
+      /** 推荐餐厅导航链接：用 meal 自带坐标（无坐标不生成）；店名取「（」和「·」前的短名 */
+      function mealNavUrl(m) {
+        if (m && typeof m.lng === 'number' && typeof m.lat === 'number') {
+          const nm = (String(m.name).split('（')[0].split('·')[0]) || m.name;
+          return `https://uri.amap.com/navigation?to=${m.lng},${m.lat},${encodeURIComponent(nm)}&mode=car&coordinate=gaode&callnative=1`;
+        }
+        return '';
+      }
+
       const DAY_ROUTE_VIA_MAX = 16;
 
       function sameRouteCoords(a, b) {
@@ -5499,7 +5504,7 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
           ? transport.links.amap_navi
           : buildAmapNaviUrl(fromPoint, toPoint, transport.mode);
         const navLink = navUrl2
-          ? `<a class="next-leg-nav" href="${esc(navUrl2)}" target="_blank" rel="noopener">导航</a>`
+          ? `<a class="next-leg-nav" href="${esc(navUrl2)}" target="_blank" rel="noopener">📍导航</a>`
           : '';
         const cls = legClass || 'next-leg';
         return `<div class="${cls}" aria-label="${esc(routeLabel)}">
@@ -5650,8 +5655,10 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
               <span class="meal-leg-icon">🍽</span>
               <span class="meal-leg-label">${esc(labelMap[matchedMealType])}：</span>
               <span class="meal-leg-name">${esc(m.main.name)}</span>
+              ${mealNavUrl(m.main) ? `<a class="next-leg-nav meal-nav" href="${esc(mealNavUrl(m.main))}" target="_blank" rel="noopener">📍导航</a>` : ''}
               <span class="meal-leg-why">${esc(m.main.why || '')}</span>
               ${m.alt ? `<span class="meal-leg-alt">备选：${esc(m.alt.name)}</span>` : ''}
+              ${m.alt && mealNavUrl(m.alt) ? `<a class="next-leg-nav meal-nav" href="${esc(mealNavUrl(m.alt))}" target="_blank" rel="noopener">📍备选</a>` : ''}
             </p>`;
           }
 
@@ -5676,6 +5683,7 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
 
         // 没匹配时段的 meal → 绑定到最后 POI（兜底）
         const leftoverMeals = pendingMeals.filter(t => !mealsUsed[t]);
+        let timelineItems = null;
         if (leftoverMeals.length && d.pois.length) {
           // 找最后 POI 卡片位置（已经在 poiItems 里），追加 meal-leg
           // 简单实现：再循环一次，追加到最后一张
@@ -5688,16 +5696,20 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
               <span class="meal-leg-icon">🍽</span>
               <span class="meal-leg-label">${esc(labelMap[type])}：</span>
               <span class="meal-leg-name">${esc(m.main.name)}</span>
+              ${mealNavUrl(m.main) ? `<a class="next-leg-nav meal-nav" href="${esc(mealNavUrl(m.main))}" target="_blank" rel="noopener">📍导航</a>` : ''}
               <span class="meal-leg-why">${esc(m.main.why || '')}</span>
               ${m.alt ? `<span class="meal-leg-alt">备选：${esc(m.alt.name)}</span>` : ''}
+              ${m.alt && mealNavUrl(m.alt) ? `<a class="next-leg-nav meal-nav" href="${esc(mealNavUrl(m.alt))}" target="_blank" rel="noopener">📍备选</a>` : ''}
             </p>`;
           }).join('');
-          // 在最后 <li> 闭合前插入（regex 替换）
+          // 在最后 POI 卡片 </li> 闭合前插入兜底 meal-leg（时段窗口没匹配到的餐）
           const lastIdx = poiItems.lastIndexOf('</li>');
-          if (lastIdx !== -1) {
-            // 不动 - 因为我们已经在循环中处理过了，fallback 留作未来扩展
+          if (lastIdx !== -1 && leftoverHtml) {
+            timelineItems = poiItems.slice(0, lastIdx) + leftoverHtml + poiItems.slice(lastIdx);
           }
         }
+
+        const finalPoiItems = typeof timelineItems === 'string' ? timelineItems : poiItems;
 
         const dayRoute = collectDayRouteStops(d);
         const dayRouteBtn = dayRoute
@@ -5714,7 +5726,7 @@ p, li, span, div, b, strong, em, small, .note, .desc, .summary, .theme, .why { c
               </div>
             </header>
             <p class="theme">${esc(d.theme || '')}</p>
-            <ol class="timeline">${morningLegHtml}${poiItems}</ol>
+            <ol class="timeline">${morningLegHtml}${finalPoiItems}</ol>
             ${wsTag}
             ${planBHtml}
             ${daySafetyHtml}
