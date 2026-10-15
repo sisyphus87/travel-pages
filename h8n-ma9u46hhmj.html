@@ -318,7 +318,6 @@
       }
       .drawer-toggle .label { display: none; }
     }
-
     /* ===== Drawer Backdrop ===== */
     .drawer-backdrop {
       position: fixed;
@@ -1428,8 +1427,21 @@ p a, a { color: #b3541e !important; }
 .zx-xhs .zx-xhs-body{font-size:.88em;line-height:1.7;color:#555;padding:0 0 10px;white-space:pre-wrap}
 .zx-xhs-links{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px}
 .zx-xhs-links a{font-size:.8em;color:#c24f42;background:#fff;border:1px solid #f0ddd6;border-radius:16px;padding:4px 10px;text-decoration:none}
+.zx-master{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e8e2d8;border-radius:14px;padding:12px 14px;cursor:pointer;user-select:none;font-weight:700;color:#8a5a2b;margin:10px 0;box-shadow:0 1px 4px rgba(0,0,0,.04);-webkit-tap-highlight-color:transparent}
+.zx-master .zx-mprog{font-size:.78em;color:#999;background:#f6f4f0;border-radius:6px;padding:2px 8px}
+.zx-master .zx-mbar{flex:1;height:6px;background:#f0ebe1;border-radius:6px;overflow:hidden;max-width:220px}
+.zx-master .zx-mbar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c99b6a,#8a5a2b);transition:width .3s}
+.zx-master .zx-arrow{color:#b9a98f;transition:transform .25s}
+.zx-master.zx-open .zx-arrow{transform:rotate(180deg)}
 </style>
 <div class="zx-wrap" id="zx-checklist">
+ <div class="zx-master" id="zx-master" role="button" tabindex="0" aria-expanded="false">
+   🎒 每日行动清单
+   <span class="zx-mbar"><i id="zx-mbar-i"></i></span>
+   <span class="zx-mprog" id="zx-mprog">0/0</span>
+   <span class="zx-arrow">▾</span>
+ </div>
+ <div id="zx-inner" style="display:none">
  <div class="zx-title">🎒 每日行动清单</div>
  <div class="zx-sub">点日期行展开当天安排 · 勾选自动保存（本机浏览器）· 小红书攻略要点穿插在下方各日行程内</div>
  <div class="zx-bar"><i id="zx-total-bar"></i></div>
@@ -1605,6 +1617,7 @@ p a, a { color: #b3541e !important; }
 <label class="zx-item"><input type="checkbox" data-k="d8-4"><span class="zx-ic">🎒</span><span class="zx-tx">身份证放随身包；昨晚河园票根留作纪念</span></label></div>
  </div>
 </div>
+ </div>
 </div>
 <script>
 (function(){
@@ -1619,6 +1632,7 @@ p a, a { color: #b3541e !important; }
      card.querySelector('.zx-prog').textContent=n+'/'+card.querySelectorAll('input').length;
      done=0;document.querySelectorAll('.zx-wrap input[type=checkbox]').forEach(function(c){if(c.checked)done++});
      document.getElementById('zx-total-bar').style.width=(done/total*100)+'%';
+     refreshMaster();
    });
  });
  document.querySelectorAll('.zx-card').forEach(function(c){
@@ -1627,6 +1641,28 @@ p a, a { color: #b3541e !important; }
  });
  var bar=document.getElementById('zx-total-bar');
  if(bar)bar.style.width=(done/total*100)+'%';
+ // —— 整体收缩/展开（默认收起，localStorage 记忆）——
+ function refreshMaster(){
+   var mp=document.getElementById('zx-mprog'),mb=document.getElementById('zx-mbar-i');
+   if(mp){mp.textContent=done+'/'+total;}
+   if(mb){mb.style.width=(total?done/total*100:0)+'%';}
+ }
+ function setMaster(open){
+   var w=document.getElementById('zx-inner'),m=document.getElementById('zx-master');
+   if(!w||!m)return;
+   w.style.display=open?'':'none';
+   m.classList.toggle('zx-open',open);
+   m.setAttribute('aria-expanded',open?'true':'false');
+   localStorage.setItem('zxv3-master',open?'1':'0');
+ }
+ var mm=document.getElementById('zx-master');
+ if(mm){
+   mm.addEventListener('click',function(){setMaster(document.getElementById('zx-inner').style.display==='none');});
+   mm.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setMaster(document.getElementById('zx-inner').style.display==='none');}});
+ }
+ setMaster(localStorage.getItem('zxv3-master')==='1');
+ refreshMaster();
+ var origBar=bar;
 })();
 </script>
 <script>
