@@ -1,0 +1,2 @@
+/* travel-pages 外置规则：悬浮行程信息按钮默认隐藏（inline 版会使 Pages 构建 errored）*/
+button.drawer-toggle,.drawer,.drawer-backdrop{display:none !important}
