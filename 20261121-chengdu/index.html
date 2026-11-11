@@ -1279,6 +1279,37 @@
       #map { display: none; }
     }
   </style>
+<style id="zx-force-light">
+/* ===== 亮色锁定层：禁用系统深色模式覆盖（Plan B/安全卡对比度修复） ===== */
+:root, html { color-scheme: light !important; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #fafaf7 !important; --bg-elevated: #ffffff !important; --bg-soft: #f4f2ec !important;
+    --fg: #171717 !important; --fg-muted: #595959 !important; --fg-subtle: #8a8a87 !important;
+    --line: #e8e6e0 !important; --line-strong: #d6d3cc !important;
+    --accent: #c8421a !important; --accent-hover: #a83512 !important; --accent-soft: #fbeee8 !important;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.04) !important; --shadow-md: 0 2px 8px rgba(0,0,0,.06) !important; --shadow-lg: 0 12px 32px rgba(0,0,0,.10) !important;
+    --c-walk: #2d7a4a !important; --c-transit: #1f6feb !important; --c-drive: #c0392b !important; --c-bike: #e67e22 !important;
+  }
+  html, body { background: #fafaf7 !important; color: #171717 !important; }
+  /* 决策卡（Plan B）/安全卡/用餐条/地图容器：硬编码回亮色 */
+  .decision-card { background: #fffaf0 !important; border-color: #d8c8a3 !important; color: #4a3a28 !important; }
+  .decision-card strong { color: #745117 !important; }
+  .decision-card p { color: #5a4a35 !important; }
+  .safety-card { background: #fff7f6 !important; color: #5a3a2a !important; border-left-color: #b54a40 !important; }
+  ol.timeline li.time-block .meal-leg { background: #fff5e0 !important; color: #5a3a00 !important; border-left-color: #8a4d00 !important; }
+  .map-fallback { background: #ffffff !important; color: #595959 !important; }
+  .cost-margin-card, .cost-sheet, .drawer, .drawer-header, .tabs { background: #fafaf7 !important; }
+  .drawer-header { background: #ffffff !important; }
+  .tabs { background: #f4f2ec !important; }
+  .tab.active { background: #ffffff !important; color: #171717 !important; }
+  .day-card, .place .note { background: #ffffff !important; }
+  .place .note { background: #f4f2ec !important; }
+  a { color: #c8421a !important; }
+  #validation-banner { background: #fdf6e3 !important; color: #6b5312 !important; }
+  #validation-banner.banner-pass { background: #f0fdf4 !important; color: #166534 !important; }
+}
+</style>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
